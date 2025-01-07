@@ -1,154 +1,83 @@
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 
+const travelFeatures = [
+  {
+    iconBg: "bg-[#92ABD3]",
+    title: "Find trips that fit your flexible lifestyle",
+    description:
+      "Discover the perfect journey tailored to your preferences and schedule.",
+  },
+  {
+    iconBg: "bg-[#E49C95]",
+    title: "Get back to nature by travel",
+    description:
+      "Immerse yourself in the beauty of natural landscapes and reconnect with the world around you.",
+  },
+  {
+    iconBg: "bg-[#F4A24C]",
+    title: "Travel with your best friends",
+    description:
+      "Create unforgettable memories with your closest companions on your travels.",
+  },
+  {
+    iconBg: "bg-[#BCD921]",
+    title: "Travel with your best friends",
+    description:
+      "Create unforgettable memories with your closest companions on your travels.",
+  },
+  {
+    iconBg: "bg-[#F9DC5C]",
+    title: "Travel with your best friends",
+    description:
+      "Create unforgettable memories with your closest companions on your travels.",
+  },
+];
+
 export default function TravelMemories() {
   return (
-    <section className="py-16 px-6 ">
-      <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center  justify-between space-y-8 md:space-y-0 md:space-x-12">
-        <div className="md:w-1/2 mb-8 md:mb-0">
-          <h2 className="text-3xl font-bold mb-6">
-            Travel to make sweet memories
-          </h2>
-          <ul className="space-y-4">
-            <li className="flex items-start">
-              <div className="bg-blue-100 p-2 rounded-full mr-4">
-                <svg
-                  className="w-6 h-6 text-blue-500"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
+    <section className="py-16 px-6">
+      <div className="flex flex-col items-center justify-center">
+        <h1 className="text-4xl font-bold text-center my-10">
+          Voyager pour créer des souvenirs inoubliables
+        </h1>
+      </div>
+
+      <div className="max-w-7xl mx-auto flex flex-col md:flex-row mt-10 md:space-x-24 md:justify-between space-y-8 md:space-y-0">
+        <div className="md:w-1/3 mb-8 md:mb-0">
+          <ul className="space-y-8">
+            {travelFeatures.map((feature, index) => (
+              <div key={index} className="space-y-3">
+                <div
+                  className={`${feature.iconBg} py-2  px-3 rounded-sm font-extrabold text-white text-xl max-w-fit mr-4`}
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M5 13l4 4L19 7"
-                  />
-                </svg>
+                  0{index + 1}
+                </div>
+                <li className="flex items-start">
+                  <div>
+                    <h3 className=" text-2xl font-bold mb-2">
+                      {feature.title}
+                    </h3>
+                    <p className="text-gray-600">{feature.description}</p>
+                  </div>
+                </li>
               </div>
-              <div>
-                <h3 className="font-bold mb-2">
-                  Find trips that fit your flexible lifestyle
-                </h3>
-                <p className="text-gray-600">
-                  Discover the perfect journey tailored to your preferences and
-                  schedule.
-                </p>
-              </div>
-            </li>
-            <li className="flex items-start">
-              <div className="bg-green-100 p-2 rounded-full mr-4">
-                <svg
-                  className="w-6 h-6 text-green-500"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M5 13l4 4L19 7"
-                  />
-                </svg>
-              </div>
-              <div>
-                <h3 className="font-bold mb-2">Get back to nature by travel</h3>
-                <p className="text-gray-600">
-                  Immerse yourself in the beauty of natural landscapes and
-                  reconnect with the world around you.
-                </p>
-              </div>
-            </li>
+            ))}
           </ul>
           <Button className="mt-8 bg-teal-500 hover:bg-teal-600 text-white">
-            Find your escape
+            Trouvez vos destinations de rêves
           </Button>
         </div>
-        <div className="md:w-1/2 ">
+        <div className="md:w-[45%]">
           <Image
             width={600}
             height={400}
             src="/image (2).jpg"
             alt="Travel memories"
-            className="rounded-lg shadow-lg w-full h-auto"
+            className="rounded-lg shadow-lg w-[600px] h-full object-cover"
           />
         </div>
       </div>
     </section>
   );
 }
-
-// import { Button } from "@/components/ui/button";
-// import Image from "next/image";
-
-// const travelFeatures = [
-//   {
-//     iconColor: "blue",
-//     iconBg: "bg-blue-100",
-//     iconClass: "text-blue-500",
-//     title: "Find trips that fit your flexible lifestyle",
-//     description:
-//       "Discover the perfect journey tailored to your preferences and schedule.",
-//   },
-//   {
-//     iconColor: "green",
-//     iconBg: "bg-green-100",
-//     iconClass: "text-green-500",
-//     title: "Get back to nature by travel",
-//     description:
-//       "Immerse yourself in the beauty of natural landscapes and reconnect with the world around you.",
-//   },
-//   // Tu peux ajouter plus d'éléments ici si nécessaire
-// ];
-
-// export default function TravelMemories() {
-//   return (
-//     <section className="py-16 px-6">
-//       <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center space-y-8 md:space-y-0">
-//         <div className="md:w-1/2 mb-8 md:mb-0">
-//           <h2 className="text-3xl font-bold mb-6">
-//             Travel to make sweet memories
-//           </h2>
-//           <ul className="space-y-4">
-//             {travelFeatures.map((feature, index) => (
-//               <li key={index} className="flex items-start">
-//                 <div className={`${feature.iconBg} p-2 rounded-full mr-4`}>
-//                   <svg
-//                     className={`w-6 h-6 ${feature.iconClass}`}
-//                     fill="none"
-//                     viewBox="0 0 24 24"
-//                     stroke="currentColor"
-//                   >
-//                     <path
-//                       strokeLinecap="round"
-//                       strokeLinejoin="round"
-//                       strokeWidth={2}
-//                       d="M5 13l4 4L19 7"
-//                     />
-//                   </svg>
-//                 </div>
-//                 <div>
-//                   <h3 className="font-bold mb-2">{feature.title}</h3>
-//                   <p className="text-gray-600">{feature.description}</p>
-//                 </div>
-//               </li>
-//             ))}
-//           </ul>
-//           <Button className="mt-8 bg-teal-500 hover:bg-teal-600 text-white">
-//             Find your escape
-//           </Button>
-//         </div>
-//         <div className="md:w-1/2">
-//           <Image
-//             width={600}
-//             height={400}
-//             src="/image (2).jpg"
-//             alt="Travel memories"
-//             className="rounded-lg shadow-lg w-full h-auto"
-//           />
-//         </div>
-//       </div>
-//     </section>
-//   );
-// }
