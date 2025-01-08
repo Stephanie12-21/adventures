@@ -11,6 +11,7 @@ import {
   CarouselContent,
   CarouselItem,
 } from "@/components/ui/carousel";
+import { Badge } from "../ui/badge";
 
 const places = [
   {
@@ -18,58 +19,84 @@ const places = [
     location: "Malinao, Philippines",
     price: "€ 340",
     image: "/image (1).jpg",
-    reviews: "10 stars",
-  },
-  {
-    name: "Mt. Malinao",
-    location: "Malinao, Philippines",
-    price: "€ 340",
-    image: "/image (1).jpg",
-    reviews: "10 stars",
+    reviews: 4.5,
   },
   {
     name: "Statue of Liberty",
     location: "New York, USA",
     price: "€ 340",
     image: "/image (2).jpg",
-    reviews: "10 stars",
-  },
-  {
-    name: "Statue of Liberty",
-    location: "New York, USA",
-    price: "€ 340",
-    image: "/image (2).jpg",
-    reviews: "10 stars",
+    reviews: 5,
   },
   {
     name: "Thousand Island",
     location: "North Vietnam",
     price: "€ 340",
     image: "/image (3).jpg",
-    reviews: "10 stars",
+    reviews: 4,
   },
   {
     name: "Basilica Sacre",
     location: "Paris, France",
     price: "€ 340",
     image: "/image (4).jpg",
-    reviews: "10 stars",
+    reviews: 3.5,
   },
   {
     name: "Mt. Malinao",
     location: "Malinao, Philippines",
     price: "€ 340",
     image: "/image (1).jpg",
-    reviews: "10 stars",
+    reviews: 4.5,
   },
   {
     name: "Statue of Liberty",
     location: "New York, USA",
     price: "€ 340",
     image: "/image (2).jpg",
-    reviews: "10 stars",
+    reviews: 5,
+  },
+  {
+    name: "Thousand Island",
+    location: "North Vietnam",
+    price: "€ 340",
+    image: "/image (3).jpg",
+    reviews: 4,
+  },
+  {
+    name: "Basilica Sacre",
+    location: "Paris, France",
+    price: "€ 340",
+    image: "/image (4).jpg",
+    reviews: 3.5,
   },
 ];
+
+const StarRating = ({ rating }) => {
+  const maxStars = 5;
+  const fullStars = Math.floor(rating);
+  const hasHalfStar = rating % 1 >= 0.5;
+  const emptyStars = maxStars - fullStars - (hasHalfStar ? 1 : 0);
+  return (
+    <div className="flex items-center space-x-1 text-yellow-400 text-xl">
+      {Array(fullStars)
+        .fill()
+        .map((_, index) => (
+          <span key={`full-${index}`}>&#9733;</span>
+        ))}
+
+      {hasHalfStar && <span>&#9734;</span>}
+
+      {Array(emptyStars)
+        .fill()
+        .map((_, index) => (
+          <span key={`empty-${index}`} className="text-gray-300">
+            &#9733;
+          </span>
+        ))}
+    </div>
+  );
+};
 
 export default function ExploreMore() {
   const [api, setApi] = useState(null);
@@ -139,7 +166,7 @@ export default function ExploreMore() {
                   </CardContent>
                   <CardFooter className="p-4 pt-0 flex justify-between items-center">
                     <div className="flex flex-col">
-                      <span className="font-bold text-teal-500">
+                      <span className="font-bold text-xl text-teal-500">
                         {place.price}
                       </span>
                       <span className=" text-yellow-500">{place.reviews}</span>
@@ -187,6 +214,9 @@ export default function ExploreMore() {
                   alt={place.name}
                   className="w-full h-48 object-cover"
                 />
+                <Badge className="absolute top-4 right-4 bg-white/90 text-teal-600 px-3 py-1">
+                  <StarRating rating={place.reviews} />
+                </Badge>
                 <CardContent className="p-4">
                   <h3 className="font-bold text-lg mb-2">{place.name}</h3>
                   <p className="text-gray-600 flex items-center">
@@ -196,10 +226,9 @@ export default function ExploreMore() {
                 </CardContent>
                 <CardFooter className="p-4 pt-0 flex justify-between items-center">
                   <div className="flex flex-col">
-                    <span className="font-bold text-teal-500">
+                    <span className="font-bold text-xl text-teal-500">
                       {place.price}
                     </span>
-                    <span className=" text-yellow-500">{place.reviews}</span>
                   </div>
                   <Button className="text-white bg-teal-500 hover:bg-teal-500 hover:text-white">
                     Réserver maintenant
