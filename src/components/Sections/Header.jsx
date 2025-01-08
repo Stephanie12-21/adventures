@@ -13,7 +13,7 @@ export default function Header() {
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   const navItems = [
-    { href: "/", label: "Acceuil" },
+    { href: "/", label: "Accueil" },
     { href: "/", label: "Destinations" },
     { href: "/", label: "Blog & Partages" },
     { href: "/", label: "Contact" },
