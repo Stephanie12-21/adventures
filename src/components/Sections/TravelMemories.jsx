@@ -112,10 +112,12 @@ export default function TravelMemories() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.8, ease: "easeOut" }}
           >
-            <Button className="mt-12 px-8 py-6 bg-gradient-to-r from-blue-500 to-teal-400 hover:from-blue-600 hover:to-teal-500 text-white text-lg font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
-              <Plane className="mr-3 h-6 w-6" />
-              Trouvez vos destinations de rêve
-            </Button>
+            <div className="flex justify-center">
+              <Button className="mt-6 px-8 py-6 sm:mt-8 lg:mt-12 sm:px-8 lg:px-12  sm:py-5 lg:py-6 bg-gradient-to-r from-blue-500 to-teal-400 hover:from-blue-600 hover:to-teal-500 text-white text-base sm:text-base lg:text-lg font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+                <Plane className="mr-2 sm:mr-3 h-5 w-5 sm:h-6 sm:w-6" />
+                Trouvez vos destinations de rêve
+              </Button>
+            </div>
           </motion.div>
         </div>
         <div className="md:w-[45%] hidden md:block">

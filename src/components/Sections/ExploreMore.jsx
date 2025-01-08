@@ -157,6 +157,9 @@ export default function ExploreMore() {
                     alt={place.name}
                     className="w-full h-48 object-cover"
                   />
+                  <Badge className="absolute top-4 right-4 bg-white/90 text-teal-600 px-3 py-1">
+                    <StarRating rating={place.reviews} />
+                  </Badge>
                   <CardContent className="p-4">
                     <h3 className="font-bold text-lg mb-2">{place.name}</h3>
                     <p className="text-gray-600 flex items-center">
@@ -169,7 +172,6 @@ export default function ExploreMore() {
                       <span className="font-bold text-xl text-teal-500">
                         {place.price}
                       </span>
-                      <span className=" text-yellow-500">{place.reviews}</span>
                     </div>
 
                     <Button className="text-white bg-teal-500 hover:bg-teal-500 hover:text-white">
