@@ -1,16 +1,49 @@
-import {
-  Facebook,
-  FacebookIcon,
-  Linkedin,
-  LinkedinIcon,
-  PhoneIcon,
-} from "lucide-react";
+"use client";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "../ui/button";
+import { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
+  const [email, setEmail] = useState("");
+
+  const handleSubmit = async () => {
+    if (!email) {
+      toast.error("Veuillez entrer un email valide");
+      return;
+    }
+
+    try {
+      const response = await fetch("/api/newsletter", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        toast.success("Vous êtes bien abonné à la newsletter !");
+        setEmail("");
+      } else if (response.status === 409) {
+        toast.error("Vous êtes déjà abonné avec cet email.");
+        setEmail("");
+      } else {
+        toast.error("Erreur lors de l'abonnement. Essayez à nouveau.");
+        setEmail("");
+      }
+    } catch (error) {
+      console.error("Erreur réseau :", error);
+      toast.error("Erreur lors de la connexion au serveur.");
+    }
+  };
+
   const dataIcons = [
     {
       url: "https://web.facebook.com/",
@@ -38,6 +71,7 @@ export default function Footer() {
       img: "/email.svg",
     },
   ];
+
   return (
     <footer className=" px-4 sm:px-6 lg:px-8 mt-5 ">
       <div className="max-w-full mx-auto flex flex-col md:flex-row mt-10 md:space-x-24 md:justify-between space-y-8 md:space-y-0">
@@ -74,6 +108,8 @@ export default function Footer() {
             <div className="flex space-x-3 mt-5 w-full">
               <input
                 type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 placeholder="Votre adresse email"
                 id="email"
                 className="border text-base w-full rounded-lg px-4 py-2 focus:outline-none focus:ring focus:ring-blue-300"
@@ -81,7 +117,7 @@ export default function Footer() {
               />
 
               <Button
-                type="submit"
+                onClick={handleSubmit}
                 className=" px-8 py-6  bg-gradient-to-r  from-blue-500 to-teal-400 hover:from-blue-600 hover:to-teal-500 text-white text-lg font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
               >
                 S&apos;abonner
@@ -118,6 +154,12 @@ export default function Footer() {
           Stéphanie MAMINIAINA
         </Link>{" "}
       </div>
+
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+      />
     </footer>
   );
 }

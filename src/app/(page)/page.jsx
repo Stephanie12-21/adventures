@@ -10,7 +10,6 @@ import TravelMemories from "@/components/Sections/TravelMemories";
 export default function Home() {
   return (
     <div className="min-h-screen  mx-4">
-      <Header />
       <main>
         <Hero />
         <PopularPlaces />
@@ -18,7 +17,6 @@ export default function Home() {
         <ExploreMore />
         <BookNow />
       </main>
-      <Footer />
     </div>
   );
 }
