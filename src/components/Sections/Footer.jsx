@@ -69,7 +69,7 @@ export default function Footer() {
         <div className="md:w-[45%]">
           <div className="flex flex-col items-center text-center">
             <h3 className="text-xl font-semibold text-gray-800">
-              Soyez les premiers au courant grâce à notre newsletter.ns.
+              Soyez les premiers au courant grâce à notre newsletter.
             </h3>
             <div className="flex space-x-3 mt-5 w-full">
               <input
