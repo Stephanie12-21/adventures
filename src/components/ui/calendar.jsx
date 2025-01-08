@@ -2,7 +2,7 @@
 import * as React from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { DayPicker } from "react-day-picker";
-import { fr } from "date-fns/locale"; // Import de la locale française
+import { fr } from "date-fns/locale";
 
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
@@ -15,7 +15,7 @@ function Calendar({
 }) {
   return (
     <DayPicker
-      locale={fr} // Ajout de la locale française
+      locale={fr}
       showOutsideDays={afficherJoursHors}
       className={cn("p-3", className)}
       classNames={{
@@ -48,7 +48,7 @@ function Calendar({
         day_range_start: "day-range-start",
         day_range_end: "day-range-end",
         day_selected:
-          "bg-primary text-primary-foreground hover:bg-primary hover:text-primary-foreground focus:bg-primary focus:text-primary-foreground",
+          "bg-teal-500 text-primary-foreground hover:bg-teal-500 hover:text-primary-foreground focus:bg-teal-500 focus:text-primary-foreground",
         day_today: "bg-accent text-accent-foreground",
         day_outside:
           "day-outside text-muted-foreground aria-selected:bg-accent/50 aria-selected:text-muted-foreground",
