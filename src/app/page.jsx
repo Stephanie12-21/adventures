@@ -16,7 +16,6 @@ export default function Home() {
         <PopularPlaces />
         <TravelMemories />
         <ExploreMore />
-        <Adventure />
         <BookNow />
       </main>
       <Footer />

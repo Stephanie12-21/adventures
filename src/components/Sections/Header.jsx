@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
 import { Menu, X } from "lucide-react";
@@ -13,9 +14,9 @@ export default function Header() {
 
   const navItems = [
     { href: "/", label: "Acceuil" },
-    { href: "/destinations", label: "Destinations" },
-    { href: "/blog", label: "Blog" },
-    { href: "/Contact", label: "Contact" },
+    { href: "/", label: "Destinations" },
+    { href: "/", label: "Blog & Partages" },
+    { href: "/", label: "Contact" },
   ];
 
   return (
@@ -53,15 +54,15 @@ export default function Header() {
           </nav>
 
           <div className="hidden md:flex items-center justify-between space-x-5">
-            <Link
-              href="/"
-              className=" hover:text-teal-500 text-gray-700 font-medium hover:underline"
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.8, ease: "easeOut" }}
             >
-              S&apos;inscrire
-            </Link>
-            <Button className="bg-teal-500 hover:bg-teal-600 text-white">
-              Se connecter
-            </Button>
+              <Button className=" px-8 py-6 bg-gradient-to-r  from-blue-500 to-teal-400 hover:from-blue-600 hover:to-teal-500 text-white text-lg font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+                Réserver dès maintenant
+              </Button>
+            </motion.div>
           </div>
 
           <div className="md:hidden">
@@ -94,13 +95,7 @@ export default function Header() {
           ))}
           <div className=" flex flex-col space-y-4 px-3">
             <Button className="w-full bg-teal-500 hover:bg-teal-600 text-white">
-              Sign Up
-            </Button>
-            <Button
-              className="bg-inherit w-full text-gray-700 font-medium"
-              variant="outline"
-            >
-              S&apos;inscrire
+              Réserver dès maintenant
             </Button>
           </div>
         </div>

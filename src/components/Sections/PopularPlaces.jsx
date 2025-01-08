@@ -1,10 +1,6 @@
 "use client";
 
-import {
-  Card,
-  CardContent,
-  CardFooter,
-} from "@/components/ui/card";
+import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { MapPinIcon } from "lucide-react";
 import {
   Carousel,
@@ -14,31 +10,36 @@ import {
 import { useState, useEffect } from "react";
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
+import { Button } from "../ui/button";
 
 const places = [
   {
     name: "Mt. Malinao",
     location: "Malinao, Philippines",
-    price: "$340",
+    price: "€ 340",
     image: "/image (1).jpg",
+    reviews: "10 stars",
   },
   {
     name: "Statue of Liberty",
     location: "New York, USA",
-    price: "$340",
+    price: "€ 340",
     image: "/image (2).jpg",
+    reviews: "10 stars",
   },
   {
     name: "Thousand Island",
     location: "North Vietnam",
-    price: "$340",
+    price: "€ 340",
     image: "/image (3).jpg",
+    reviews: "10 stars",
   },
   {
     name: "Basilica Sacre",
     location: "Paris, France",
-    price: "$340",
+    price: "€ 340",
     image: "/image (4).jpg",
+    reviews: "10 stars",
   },
 ];
 
@@ -87,11 +88,16 @@ export default function PopularPlaces() {
 
   return (
     <section className="py-16 px-6">
-      <h2 className="text-3xl font-bold mb-8">
+      <motion.h1
+        className="text-4xl font-bold text-start mb-16 text-gray-800"
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+      >
         Les destinations les plus populaires
-      </h2>
+      </motion.h1>
 
-      <div className="md:hidden">
+      <div className="md:hidden ">
         <Carousel className="w-full" setApi={setApi}>
           <CarouselContent>
             {places.map((place, index) => (
@@ -105,14 +111,18 @@ export default function PopularPlaces() {
                   <CardContent className="p-4">
                     <h3 className="font-bold text-lg mb-2">{place.name}</h3>
                     <p className="text-gray-600 flex items-center">
-                      <MapPinIcon className="w-4 h-4 mr-1" />
+                      <MapPinIcon className="w-4 h-4 mr-1 text-teal-500" />
                       {place.location}
                     </p>
                   </CardContent>
                   <CardFooter className="p-4 pt-0 flex justify-between items-center">
-                    <span className="font-bold text-teal-500">
-                      {place.price}
-                    </span>
+                    <div className="flex flex-col">
+                      <span className="font-bold text-teal-500">
+                        {place.price}
+                      </span>
+                      <span className=" text-yellow-500">{place.reviews}</span>
+                    </div>
+
                     <button className="text-teal-500 hover:underline">
                       Réserver maintenant
                     </button>
@@ -158,15 +168,20 @@ export default function PopularPlaces() {
                 <CardContent className="p-4">
                   <h3 className="font-bold text-lg mb-2">{place.name}</h3>
                   <p className="text-gray-600 flex items-center">
-                    <MapPinIcon className="w-4 h-4 mr-1" />
+                    <MapPinIcon className="w-4 h-4 mr-1 text-teal-500" />
                     {place.location}
                   </p>
                 </CardContent>
                 <CardFooter className="p-4 pt-0 flex justify-between items-center">
-                  <span className="font-bold text-teal-500">{place.price}</span>
-                  <button className="text-teal-500 hover:underline">
+                  <div className="flex flex-col">
+                    <span className="font-bold text-teal-500">
+                      {place.price}
+                    </span>
+                    <span className=" text-yellow-500">{place.reviews}</span>
+                  </div>
+                  <Button className="text-white bg-teal-500 hover:bg-teal-500 hover:text-white">
                     Réserver maintenant
-                  </button>
+                  </Button>
                 </CardFooter>
               </Card>
             </motion.div>

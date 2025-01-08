@@ -4,40 +4,43 @@ import Image from "next/image";
 import { useEffect } from "react";
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Card } from "@/components/ui/card";
-import { Star } from "lucide-react";
+import { Plane, MapPin, Users, Leaf, Mail, Share, Heart } from "lucide-react";
 
 const travelFeatures = [
   {
-    iconBg: "bg-[#92ABD3]",
-    title: "Find trips that fit your flexible lifestyle",
+    icon: <MapPin className="w-6 h-6 text-blue-500" />,
+    iconBg: "bg-blue-100",
+    title: "Trouvez des voyages selon vos préférences",
     description:
-      "Discover the perfect journey tailored to your preferences and schedule.",
+      "Découvrez les destinations parfaitement adaptées à votre budget et à votre emploi du temps.",
   },
   {
-    iconBg: "bg-[#E49C95]",
-    title: "Get back to nature by travel",
+    icon: <Leaf className="w-6 h-6 text-green-500" />,
+    iconBg: "bg-green-100",
+    title: "Reconnectez-vous avec la nature",
     description:
-      "Immerse yourself in the beauty of natural landscapes and reconnect with the world around you.",
+      "Immergez-vous dans la beauté des paysages naturels et reconnectez-vous avec le monde qui vous entoure.",
   },
   {
-    iconBg: "bg-[#F4A24C]",
-    title: "Travel with your best friends",
+    icon: <Users className="w-6 h-6 text-orange-500" />,
+    iconBg: "bg-orange-100",
+    title: "Voyagez avec vos meilleurs amis et familles",
     description:
-      "Create unforgettable memories with your closest companions on your travels.",
+      "Créez des souvenirs inoubliables avec vos plus proches compagnons lors de vos voyages.",
   },
   {
-    iconBg: "bg-[#BCD921]",
-    title: "Travel with your best friends",
+    icon: <Mail className="w-6 h-6 text-purple-500" />,
+    iconBg: "bg-purple-100",
+    title: "Abonnez-vous à notre newsletter.",
     description:
-      "Create unforgettable memories with your closest companions on your travels.",
+      "Soyez les premiers avertis pour des nouvelles destinations, des voyages palpitants et des aventures formidables.",
   },
   {
-    iconBg: "bg-[#F9DC5C]",
-    title: "Travel with your best friends",
+    icon: <Heart className="w-6 h-6 text-red-500" />,
+    iconBg: "bg-red-100",
+    title: "Partagez vos expériences.",
     description:
-      "Create unforgettable memories with your closest companions on your travels.",
+      "Créons des liens en nous partageant nos plus belles aventures.",
   },
 ];
 
@@ -76,8 +79,8 @@ export default function TravelMemories() {
 
   return (
     <section className="py-16 px-6">
-      <div className="flex flex-col items-center justify-center">
-        <h1 className="text-4xl font-bold text-center my-10">
+      <div className="flex  items-center justify-center">
+        <h1 className="text-4xl text-gray-800 font-bold text-center my-10">
           Voyager pour créer des souvenirs inoubliables
         </h1>
       </div>
@@ -87,37 +90,42 @@ export default function TravelMemories() {
           <ul className="space-y-8">
             <motion.div
               ref={ref}
-              className="flex md:flex-col gap-4 items-center justify-between w-full"
+              className="flex md:flex-col flex-col gap-10 items-center justify-between w-full"
               initial="hidden"
               animate={controls}
             >
-              {" "}
               {travelFeatures.map((feature, index) => (
                 <motion.div key={index} custom={index} variants={cardVariants}>
-                  <div key={index} className="space-y-3">
-                    <div
-                      className={`${feature.iconBg} py-2  px-3 rounded-sm font-extrabold text-white text-xl max-w-fit mr-4`}
-                    >
-                      0{index + 1}
+                  <div className="flex items-start space-x-4">
+                    <div className={`${feature.iconBg} p-3 rounded-full`}>
+                      {feature.icon}
                     </div>
-                    <li className="flex items-start">
-                      <div>
-                        <h3 className=" text-2xl font-bold mb-2">
-                          {feature.title}
-                        </h3>
-                        <p className="text-gray-600">{feature.description}</p>
-                      </div>
-                    </li>
+                    <div>
+                      <h3 className="text-2xl font-semibold mb-2 text-gray-800">
+                        {feature.title}
+                      </h3>
+                      <p className="text-gray-600 leading-relaxed">
+                        {feature.description}
+                      </p>
+                    </div>
                   </div>
                 </motion.div>
               ))}
             </motion.div>
           </ul>
-          <Button className="mt-8 bg-teal-500 hover:bg-teal-600 text-white">
-            Trouvez vos destinations de rêves
-          </Button>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.8, ease: "easeOut" }}
+          >
+            <Button className="mt-12 px-8 py-6 bg-gradient-to-r from-blue-500 to-teal-400 hover:from-blue-600 hover:to-teal-500 text-white text-lg font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+              <Plane className="mr-3 h-6 w-6" />
+              Trouvez vos destinations de rêve
+            </Button>
+          </motion.div>
         </div>
-        <div className="md:w-[45%]">
+        <div className="md:w-[45%] hidden md:block">
           <Image
             width={600}
             height={400}
@@ -126,58 +134,6 @@ export default function TravelMemories() {
             className="rounded-lg shadow-lg w-[600px] h-full object-cover"
           />
         </div>
-        {/* <div className="md:w-[45%]">
-          <Card className="relative overflow-hidden rounded-3xl">
-            <div className="aspect-[4/3] relative">
-              <Image
-                width={600}
-                height={400}
-                src="/image (2).jpg"
-                alt="Travel memories"
-                className="rounded-lg shadow-lg w-[600px] h-full object-cover"
-              />
-
-              
-              <div className="absolute inset-0 p-4">
-              
-                <div className="absolute left-4 top-4 flex items-center gap-2 bg-white/80 backdrop-blur-sm rounded-full p-1 pr-3">
-                  <Avatar className="h-8 w-8">
-                    <AvatarImage src="/placeholder.svg?height=32&width=32" />
-                    <AvatarFallback>U1</AvatarFallback>
-                  </Avatar>
-                  <div className="flex items-center text-sm font-medium">
-                    <span>8.4</span>
-                    <Star className="h-4 w-4 ml-1 fill-current" />
-                  </div>
-                </div>
-
-               
-                <div className="absolute right-4 top-1/3 flex items-center gap-2 bg-white/80 backdrop-blur-sm rounded-full p-1 pr-3">
-                  <Avatar className="h-8 w-8">
-                    <AvatarImage src="/placeholder.svg?height=32&width=32" />
-                    <AvatarFallback>U2</AvatarFallback>
-                  </Avatar>
-                  <div className="flex items-center text-sm font-medium">
-                    <span>9.2</span>
-                    <Star className="h-4 w-4 ml-1 fill-current" />
-                  </div>
-                </div>
-
-              
-                <div className="absolute left-4 bottom-4 flex items-center gap-2 bg-white/80 backdrop-blur-sm rounded-full p-1 pr-3">
-                  <Avatar className="h-8 w-8">
-                    <AvatarImage src="/placeholder.svg?height=32&width=32" />
-                    <AvatarFallback>U3</AvatarFallback>
-                  </Avatar>
-                  <div className="flex items-center text-sm font-medium">
-                    <span>8.9</span>
-                    <Star className="h-4 w-4 ml-1 fill-current" />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </Card>
-        </div> */}
       </div>
     </section>
   );
