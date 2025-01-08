@@ -35,13 +35,6 @@ const travelFeatures = [
     description:
       "Soyez les premiers avertis pour des nouvelles destinations, des voyages palpitants et des aventures formidables.",
   },
-  {
-    icon: <Heart className="w-6 h-6 text-red-500" />,
-    iconBg: "bg-red-100",
-    title: "Partagez vos expériences.",
-    description:
-      "Créons des liens en nous partageant nos plus belles aventures.",
-  },
 ];
 
 export default function TravelMemories() {
