@@ -14,3 +14,23 @@ model newsletter {
   email             String  @unique
   unsubscribeToken  String? 
 }
+
+model reservation {
+  id                Int     @id @default(autoincrement())
+  nom               String
+  email             String
+  phone1            String
+  phone2            String
+  date              DateTime @default(now())
+  passengers        Int
+  adults            Int
+  childrens         Int?
+  babies            Int?
+  message           String? 
+  status            status @default(pending)
+}
+enum status {
+  pending
+  confirmed
+  canceled
+}

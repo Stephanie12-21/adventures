@@ -1,15 +1,15 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
+  const router = useRouter();
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   const navItems = [
@@ -19,6 +19,9 @@ export default function Header() {
     { href: "/Contact", label: "Contact" },
   ];
 
+  const handleReservation = () => {
+    router.push("/Reservations");
+  };
   return (
     <header className=" my-3">
       <div className="container items-center mx-auto px-4 sm:px-6 lg:px-8">
@@ -54,7 +57,10 @@ export default function Header() {
           </nav>
 
           <div className="hidden md:flex items-center justify-between space-x-5">
-            <Button className=" px-8 py-6 bg-gradient-to-r  from-blue-500 to-teal-400 hover:from-blue-600 hover:to-teal-500 text-white text-lg font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+            <Button
+              onClick={handleReservation}
+              className=" px-8 py-6 bg-gradient-to-r  from-blue-500 to-teal-400 hover:from-blue-600 hover:to-teal-500 text-white text-lg font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+            >
               Réserver dès maintenant
             </Button>
           </div>

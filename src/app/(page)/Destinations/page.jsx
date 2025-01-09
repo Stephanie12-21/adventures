@@ -14,6 +14,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 const places = [
   {
@@ -213,6 +214,7 @@ const StarRating = ({ rating }) => {
 };
 
 export default function ExploreMore() {
+  const router = useRouter();
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 8;
   const totalPages = Math.ceil(places.length / itemsPerPage);
@@ -268,6 +270,10 @@ export default function ExploreMore() {
     });
   }, [api]);
 
+  const handleReservation = () => {
+    router.push("/Reservations");
+  };
+
   return (
     <section className="py-16 mt-10 px-6">
       <div className="flex  items-center justify-center mb-10">
@@ -308,7 +314,10 @@ export default function ExploreMore() {
                       </span>
                     </div>
 
-                    <Button className="text-white bg-teal-500 hover:bg-teal-500 hover:text-white">
+                    <Button
+                      onClick={handleReservation}
+                      className="text-white bg-teal-500 hover:bg-teal-500 hover:text-white"
+                    >
                       Réserver maintenant
                     </Button>
                   </CardFooter>
@@ -372,7 +381,10 @@ export default function ExploreMore() {
                       {place.price}
                     </span>
                   </div>
-                  <Button className="text-white bg-teal-500 hover:bg-teal-500 hover:text-white">
+                  <Button
+                    onClick={handleReservation}
+                    className="text-white bg-teal-500 hover:bg-teal-500 hover:text-white"
+                  >
                     Réserver maintenant
                   </Button>
                 </CardFooter>

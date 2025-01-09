@@ -12,6 +12,7 @@ import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { Button } from "../ui/button";
 import { Badge } from "../ui/badge";
+import { useRouter } from "next/navigation";
 
 const places = [
   {
@@ -71,6 +72,7 @@ const StarRating = ({ rating }) => {
 };
 
 export default function PopularPlaces() {
+  const router = useRouter();
   const [api, setApi] = useState(null);
   const [current, setCurrent] = useState(0);
   const controls = useAnimation();
@@ -113,6 +115,10 @@ export default function PopularPlaces() {
     });
   }, [api]);
 
+  const handleReservation = () => {
+    router.push("/Reservations");
+  };
+
   return (
     <section className="py-16 px-6">
       <motion.h1
@@ -152,7 +158,10 @@ export default function PopularPlaces() {
                       </span>
                     </div>
 
-                    <button className="text-teal-500 hover:underline">
+                    <button
+                      onClick={handleReservation}
+                      className="text-teal-500 hover:underline"
+                    >
                       Réserver maintenant
                     </button>
                   </CardFooter>
@@ -207,7 +216,10 @@ export default function PopularPlaces() {
                       {place.price}
                     </span>
                   </div>
-                  <Button className="text-white bg-teal-500 hover:bg-teal-600">
+                  <Button
+                    onClick={handleReservation}
+                    className="text-white bg-teal-500 hover:bg-teal-600"
+                  >
                     Réserver maintenant
                   </Button>
                 </CardFooter>

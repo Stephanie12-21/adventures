@@ -12,6 +12,7 @@ import {
   CarouselItem,
 } from "@/components/ui/carousel";
 import { Badge } from "../ui/badge";
+import { useRouter } from "next/navigation";
 
 const places = [
   {
@@ -99,6 +100,7 @@ const StarRating = ({ rating }) => {
 };
 
 export default function ExploreMore() {
+  const router = useRouter();
   const [api, setApi] = useState(null);
   const [current, setCurrent] = useState(0);
   const controls = useAnimation();
@@ -141,6 +143,10 @@ export default function ExploreMore() {
     });
   }, [api]);
 
+  const handleReservation = () => {
+    router.push("/Reservations");
+  };
+
   return (
     <section className="py-16 mt-10 px-6">
       <div className="flex  items-center justify-center mb-10">
@@ -174,7 +180,10 @@ export default function ExploreMore() {
                       </span>
                     </div>
 
-                    <Button className="text-white bg-teal-500 hover:bg-teal-500 hover:text-white">
+                    <Button
+                      onClick={handleReservation}
+                      className="text-white bg-teal-500 hover:bg-teal-500 hover:text-white"
+                    >
                       Réserver maintenant
                     </Button>
                   </CardFooter>
@@ -232,7 +241,10 @@ export default function ExploreMore() {
                       {place.price}
                     </span>
                   </div>
-                  <Button className="text-white bg-teal-500 hover:bg-teal-500 hover:text-white">
+                  <Button
+                    onClick={handleReservation}
+                    className="text-white bg-teal-500 hover:bg-teal-500 hover:text-white"
+                  >
                     Réserver maintenant
                   </Button>
                 </CardFooter>

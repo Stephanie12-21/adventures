@@ -48,7 +48,7 @@ const blogPosts = [
     excerpt:
       "Découvrez des itinéraires spectaculaires pour vos aventures en voiture.",
     date: "2025-05-12",
-    image: "/roadtrip.jpg",
+    image: "/oute.jpg",
   },
   {
     id: 5,
