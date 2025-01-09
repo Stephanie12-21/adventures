@@ -169,7 +169,6 @@ const Blog = () => {
           ))}
         </div>
 
-        {/* Pagination */}
         <div className="flex justify-center items-center mt-8 space-x-2">
           <button
             onClick={() => handlePageChange(currentPage - 1)}
