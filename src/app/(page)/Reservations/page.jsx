@@ -35,19 +35,6 @@ const Contact = () => {
     const passengers =
       parseInt(adults, 10) + parseInt(childrens, 10) + parseInt(babies, 10);
 
-    console.log(
-      `Données reçues : 
-  Nom : ${nom}, 
-  Email : ${email}, 
-  Passagers : ${passengers}, 
-  Téléphone 1 : ${phone1}, 
-  Téléphone 2 : ${phone2}, 
-  Adultes : ${adults}, 
-  Enfants : ${childrens}, 
-  Bébés : ${babies}, 
-  Message : ${message}`
-    );
-
     const data = {
       nom,
       email,
