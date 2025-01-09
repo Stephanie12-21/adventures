@@ -271,7 +271,14 @@ export default function ExploreMore() {
   return (
     <section className="py-16 mt-10 px-6">
       <div className="flex  items-center justify-center mb-10">
-        <h2 className="text-4xl font-bold text-gray-800">Notre catalogue</h2>
+        <header className="text-center mb-12">
+          <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-teal-500 bg-clip-text text-transparent">
+            Destinations Adventures
+          </h1>
+          <p className="text-gray-600 mt-2">
+            Notre catalogue de voyages pour des aventures inoubliables.
+          </p>
+        </header>
       </div>
       <div className="md:hidden">
         <Carousel className="w-full" setApi={setApi}>
