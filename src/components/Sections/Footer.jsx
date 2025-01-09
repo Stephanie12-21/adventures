@@ -3,20 +3,24 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button } from "../ui/button";
 import { useState } from "react";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-
+import { SuccessModal } from "@/app/(modal)/newsletter/SuccessModal";
+import { ErrorModal } from "@/app/(modal)/newsletter/ErrorModal";
+import { InfoModal } from "@/app/(modal)/newsletter/InfoModal";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
   const [email, setEmail] = useState("");
+  const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
+  const [isErrorModalOpen, setIsErrorModalOpen] = useState(false);
+  const [isInfoModalOpen, setIsInfoModalOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async () => {
     if (!email) {
-      toast.error("Veuillez entrer un email valide");
+      setIsErrorModalOpen(true);
       return;
     }
-
+    setLoading(true);
     try {
       const response = await fetch("/api/newsletter", {
         method: "POST",
@@ -29,18 +33,20 @@ export default function Footer() {
       const data = await response.json();
 
       if (response.ok) {
-        toast.success("Vous êtes bien abonné à la newsletter !");
+        setIsSuccessModalOpen(true);
         setEmail("");
       } else if (response.status === 409) {
-        toast.error("Vous êtes déjà abonné avec cet email.");
+        setIsInfoModalOpen(true);
         setEmail("");
       } else {
-        toast.error("Erreur lors de l'abonnement. Essayez à nouveau.");
+        setIsErrorModalOpen(true);
         setEmail("");
       }
     } catch (error) {
       console.error("Erreur réseau :", error);
-      toast.error("Erreur lors de la connexion au serveur.");
+      setIsErrorModalOpen(true);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -118,9 +124,10 @@ export default function Footer() {
 
               <Button
                 onClick={handleSubmit}
+                disabled={loading}
                 className=" px-8 py-6  bg-gradient-to-r  from-blue-500 to-teal-400 hover:from-blue-600 hover:to-teal-500 text-white text-lg font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
               >
-                S&apos;abonner
+                {loading ? "Traitement en cours..." : "S'abonner"}
               </Button>
             </div>
           </div>
@@ -155,10 +162,17 @@ export default function Footer() {
         </Link>{" "}
       </div>
 
-      <ToastContainer
-        position="top-center"
-        autoClose={5000}
-        hideProgressBar={false}
+      <SuccessModal
+        isOpen={isSuccessModalOpen}
+        onClose={() => setIsSuccessModalOpen(false)}
+      />
+      <ErrorModal
+        isOpen={isErrorModalOpen}
+        onClose={() => setIsErrorModalOpen(false)}
+      />
+      <InfoModal
+        isOpen={isInfoModalOpen}
+        onClose={() => setIsInfoModalOpen(false)}
       />
     </footer>
   );

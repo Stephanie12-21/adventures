@@ -15,8 +15,8 @@ export default function Header() {
   const navItems = [
     { href: "/", label: "Accueil" },
     { href: "/", label: "Destinations" },
-    { href: "/", label: "Blog & Partages" },
-    { href: "/", label: "Contact" },
+    { href: "/", label: "Blog" },
+    { href: "/Contact", label: "Contact" },
   ];
 
   return (
@@ -54,15 +54,9 @@ export default function Header() {
           </nav>
 
           <div className="hidden md:flex items-center justify-between space-x-5">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.8, ease: "easeOut" }}
-            >
-              <Button className=" px-8 py-6 bg-gradient-to-r  from-blue-500 to-teal-400 hover:from-blue-600 hover:to-teal-500 text-white text-lg font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
-                Réserver dès maintenant
-              </Button>
-            </motion.div>
+            <Button className=" px-8 py-6 bg-gradient-to-r  from-blue-500 to-teal-400 hover:from-blue-600 hover:to-teal-500 text-white text-lg font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+              Réserver dès maintenant
+            </Button>
           </div>
 
           <div className="md:hidden">
@@ -88,7 +82,7 @@ export default function Header() {
             <Link
               key={item.href}
               href={item.href}
-              className="flex px-3 py-2 rounded-md items-center justify-center text-base font-medium text-gray-700 hover:text-teal-500 hover:bg-gray-50"
+              className="flex px-3 py-2 rounded-md items-center justify-center text-lg font-medium text-gray-700 hover:text-teal-500 hover:bg-gray-50"
             >
               {item.label}
             </Link>
