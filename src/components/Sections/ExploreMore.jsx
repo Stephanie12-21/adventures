@@ -13,9 +13,11 @@ import {
 } from "@/components/ui/carousel";
 import { Badge } from "../ui/badge";
 import { useRouter } from "next/navigation";
+import { id } from "date-fns/locale";
 
 const places = [
   {
+    id: 1,
     name: "Mt. Malinao",
     location: "Malinao, Philippines",
     price: "€ 340",
@@ -23,6 +25,7 @@ const places = [
     reviews: 4.5,
   },
   {
+    id: 2,
     name: "Statue of Liberty",
     location: "New York, USA",
     price: "€ 340",
@@ -30,6 +33,7 @@ const places = [
     reviews: 5,
   },
   {
+    id: 3,
     name: "Thousand Island",
     location: "North Vietnam",
     price: "€ 340",
@@ -37,6 +41,7 @@ const places = [
     reviews: 4,
   },
   {
+    id: 4,
     name: "Basilica Sacre",
     location: "Paris, France",
     price: "€ 340",
@@ -44,6 +49,7 @@ const places = [
     reviews: 3.5,
   },
   {
+    id: 5,
     name: "Mt. Malinao",
     location: "Malinao, Philippines",
     price: "€ 340",
@@ -51,6 +57,7 @@ const places = [
     reviews: 4.5,
   },
   {
+    id: 6,
     name: "Statue of Liberty",
     location: "New York, USA",
     price: "€ 340",
@@ -58,6 +65,7 @@ const places = [
     reviews: 5,
   },
   {
+    id: 7,
     name: "Thousand Island",
     location: "North Vietnam",
     price: "€ 340",
@@ -65,6 +73,7 @@ const places = [
     reviews: 4,
   },
   {
+    id: 8,
     name: "Basilica Sacre",
     location: "Paris, France",
     price: "€ 340",
@@ -147,6 +156,10 @@ export default function ExploreMore() {
     router.push("/Reservations");
   };
 
+  const handleCardClick = (place) => {
+    router.push(`/Destinations/Info/${place.id}`);
+  };
+
   return (
     <section className="py-16 mt-10 px-6">
       <div className="flex  items-center justify-center mb-10">
@@ -157,7 +170,10 @@ export default function ExploreMore() {
           <CarouselContent>
             {places.map((place, index) => (
               <CarouselItem key={index}>
-                <Card className="overflow-hidden">
+                <Card
+                  onClick={() => handleCardClick(place)}
+                  className="overflow-hidden"
+                >
                   <img
                     src={place.image}
                     alt={place.name}
@@ -217,6 +233,7 @@ export default function ExploreMore() {
           {places.map((place, index) => (
             <motion.div key={index} custom={index} variants={cardVariants}>
               <Card
+                onClick={() => handleCardClick(place)}
                 key={index}
                 className="overflow-hidden transition-all duration-300 ease-in-out hover:shadow-xl hover:scale-105 transform"
               >

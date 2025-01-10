@@ -18,6 +18,7 @@ import { useRouter } from "next/navigation";
 
 const places = [
   {
+    id: 1,
     name: "Mt. Malinao",
     location: "Malinao, Philippines",
     price: "€ 340",
@@ -25,6 +26,7 @@ const places = [
     reviews: 4.5,
   },
   {
+    id: 2,
     name: "Statue of Liberty",
     location: "New York, USA",
     price: "€ 400",
@@ -32,6 +34,7 @@ const places = [
     reviews: 5,
   },
   {
+    id: 3,
     name: "Thousand Island",
     location: "North Vietnam",
     price: "€ 320",
@@ -39,6 +42,7 @@ const places = [
     reviews: 4,
   },
   {
+    id: 4,
     name: "Basilica Sacre",
     location: "Paris, France",
     price: "€ 360",
@@ -46,6 +50,7 @@ const places = [
     reviews: 3.5,
   },
   {
+    id: 5,
     name: "Mount Fuji",
     location: "Shizuoka, Japan",
     price: "€ 380",
@@ -53,6 +58,7 @@ const places = [
     reviews: 4.8,
   },
   {
+    id: 6,
     name: "Great Wall of China",
     location: "Beijing, China",
     price: "€ 450",
@@ -60,6 +66,7 @@ const places = [
     reviews: 4.9,
   },
   {
+    id: 7,
     name: "Santorini",
     location: "Santorini, Greece",
     price: "€ 420",
@@ -67,6 +74,7 @@ const places = [
     reviews: 4.7,
   },
   {
+    id: 8,
     name: "Grand Canyon",
     location: "Arizona, USA",
     price: "€ 350",
@@ -74,6 +82,7 @@ const places = [
     reviews: 4.6,
   },
   {
+    id: 9,
     name: "Pyramids of Giza",
     location: "Cairo, Egypt",
     price: "€ 330",
@@ -81,6 +90,7 @@ const places = [
     reviews: 4.3,
   },
   {
+    id: 10,
     name: "Machu Picchu",
     location: "Cusco Region, Peru",
     price: "€ 370",
@@ -88,6 +98,7 @@ const places = [
     reviews: 5,
   },
   {
+    id: 11,
     name: "Eiffel Tower",
     location: "Paris, France",
     price: "€ 300",
@@ -95,6 +106,7 @@ const places = [
     reviews: 4.9,
   },
   {
+    id: 12,
     name: "Niagara Falls",
     location: "Ontario, Canada",
     price: "€ 310",
@@ -102,6 +114,7 @@ const places = [
     reviews: 4.6,
   },
   {
+    id: 13,
     name: "Colosseum",
     location: "Rome, Italy",
     price: "€ 380",
@@ -109,6 +122,7 @@ const places = [
     reviews: 4.7,
   },
   {
+    id: 14,
     name: "Sydney Opera House",
     location: "Sydney, Australia",
     price: "€ 400",
@@ -116,6 +130,7 @@ const places = [
     reviews: 4.8,
   },
   {
+    id: 15,
     name: "Taj Mahal",
     location: "Agra, India",
     price: "€ 340",
@@ -123,6 +138,7 @@ const places = [
     reviews: 4.5,
   },
   {
+    id: 16,
     name: "Christ the Redeemer",
     location: "Rio de Janeiro, Brazil",
     price: "€ 350",
@@ -130,6 +146,7 @@ const places = [
     reviews: 4.6,
   },
   {
+    id: 17,
     name: "Angkor Wat",
     location: "Siem Reap, Cambodia",
     price: "€ 320",
@@ -137,6 +154,7 @@ const places = [
     reviews: 4.7,
   },
   {
+    id: 18,
     name: "Banff National Park",
     location: "Alberta, Canada",
     price: "€ 370",
@@ -144,6 +162,7 @@ const places = [
     reviews: 4.8,
   },
   {
+    id: 19,
     name: "Table Mountain",
     location: "Cape Town, South Africa",
     price: "€ 360",
@@ -151,6 +170,7 @@ const places = [
     reviews: 4.6,
   },
   {
+    id: 20,
     name: "Petra",
     location: "Ma'an, Jordan",
     price: "€ 400",
@@ -158,6 +178,7 @@ const places = [
     reviews: 4.9,
   },
   {
+    id: 21,
     name: "Burj Khalifa",
     location: "Dubai, UAE",
     price: "€ 410",
@@ -165,6 +186,7 @@ const places = [
     reviews: 4.8,
   },
   {
+    id: 22,
     name: "Mount Kilimanjaro",
     location: "Tanzania",
     price: "€ 450",
@@ -172,6 +194,7 @@ const places = [
     reviews: 4.7,
   },
   {
+    id: 23,
     name: "Iguazu Falls",
     location: "Argentina/Brazil Border",
     price: "€ 340",
@@ -179,6 +202,7 @@ const places = [
     reviews: 4.9,
   },
   {
+    id: 24,
     name: "Stonehenge",
     location: "Wiltshire, England",
     price: "€ 300",
@@ -274,6 +298,10 @@ export default function ExploreMore() {
     router.push("/Reservations");
   };
 
+  const handleCardClick = (place) => {
+    router.push(`/Destinations/Info/${place.id}`);
+  };
+
   return (
     <section className="py-16 mt-10 px-6">
       <div className="flex  items-center justify-center mb-10">
@@ -291,7 +319,10 @@ export default function ExploreMore() {
           <CarouselContent>
             {paginatedPosts.map((place, index) => (
               <CarouselItem key={index}>
-                <Card className="overflow-hidden">
+                <Card
+                  onClick={() => handleCardClick()}
+                  className="overflow-hidden"
+                >
                   <img
                     src={place.image}
                     alt={place.name}
@@ -357,6 +388,7 @@ export default function ExploreMore() {
               transition={{ duration: 0.5, delay: index * 0.1 }}
             >
               <Card
+                onClick={() => handleCardClick(place)}
                 key={index}
                 className="overflow-hidden transition-all duration-300 ease-in-out hover:shadow-xl hover:scale-105 transform"
               >

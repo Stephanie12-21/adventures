@@ -17,6 +17,7 @@ import {
   ChevronLeft,
   ChevronRight,
 } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 const blogPosts = [
   {
@@ -91,6 +92,7 @@ const blogPosts = [
 ];
 
 const Blog = () => {
+  const router = useRouter();
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 3;
   const totalPages = Math.ceil(blogPosts.length / itemsPerPage);
@@ -103,6 +105,10 @@ const Blog = () => {
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage
   );
+
+  const handleBlogClick = () => {
+    router.push(`/Blog/Infoblog/`);
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-teal-50 p-8">
@@ -157,6 +163,7 @@ const Blog = () => {
                     })}
                   </div>
                   <Button
+                    onClick={() => handleBlogClick()}
                     variant="ghost"
                     className="text-blue-600 hover:text-blue-700 hover:bg-blue-50 transition-colors duration-300"
                   >

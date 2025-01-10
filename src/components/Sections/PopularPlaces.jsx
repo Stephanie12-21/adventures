@@ -16,6 +16,7 @@ import { useRouter } from "next/navigation";
 
 const places = [
   {
+    id: 1,
     name: "Mt. Malinao",
     location: "Malinao, Philippines",
     price: "€ 340",
@@ -23,6 +24,7 @@ const places = [
     reviews: 4.5,
   },
   {
+    id: 2,
     name: "Statue of Liberty",
     location: "New York, USA",
     price: "€ 340",
@@ -30,6 +32,7 @@ const places = [
     reviews: 5,
   },
   {
+    id: 3,
     name: "Thousand Island",
     location: "North Vietnam",
     price: "€ 340",
@@ -37,6 +40,7 @@ const places = [
     reviews: 4,
   },
   {
+    id: 4,
     name: "Basilica Sacre",
     location: "Paris, France",
     price: "€ 340",
@@ -119,6 +123,9 @@ export default function PopularPlaces() {
     router.push("/Reservations");
   };
 
+  const handleCardClick = (place) => {
+    router.push(`/Destinations/Info/${place.id}`);
+  };
   return (
     <section className="py-16 px-6">
       <motion.h1
@@ -135,7 +142,10 @@ export default function PopularPlaces() {
           <CarouselContent>
             {places.map((place, index) => (
               <CarouselItem key={index}>
-                <Card className="overflow-hidden">
+                <Card
+                  onClick={() => handleCardClick(place)}
+                  className="overflow-hidden"
+                >
                   <img
                     src={place.image}
                     alt={place.name}
@@ -194,7 +204,10 @@ export default function PopularPlaces() {
         >
           {places.map((place, index) => (
             <motion.div key={index} custom={index} variants={cardVariants}>
-              <Card className="overflow-hidden transition-all duration-300 ease-in-out hover:shadow-xl hover:scale-105 transform">
+              <Card
+                onClick={() => handleCardClick(place)}
+                className="overflow-hidden transition-all duration-300 ease-in-out hover:shadow-xl hover:scale-105 transform"
+              >
                 <img
                   src={place.image}
                   alt={place.name}
