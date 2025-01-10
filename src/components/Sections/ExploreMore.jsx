@@ -160,6 +160,10 @@ export default function ExploreMore() {
     router.push(`/Destinations/Info/${place.id}`);
   };
 
+  const handleSeeMore = () => {
+    router.push("/Destinations");
+  };
+
   return (
     <section className="py-16 mt-10 px-6">
       <div className="flex  items-center justify-center mb-10">
@@ -277,7 +281,10 @@ export default function ExploreMore() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.8, ease: "easeOut" }}
         >
-          <Button className="mt-12 px-8 py-6 bg-gradient-to-r  from-blue-500 to-teal-400 hover:from-blue-600 hover:to-teal-500 text-white text-lg font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+          <Button
+            onClick={handleSeeMore}
+            className="mt-12 px-8 py-6 bg-gradient-to-r  from-blue-500 to-teal-400 hover:from-blue-600 hover:to-teal-500 text-white text-lg font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+          >
             Voir plus de destinations
           </Button>
         </motion.div>
