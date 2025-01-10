@@ -2,12 +2,18 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { CalendarIcon, ClockIcon, TagIcon } from "lucide-react";
-import Lightbox from "react-image-lightbox";
-import "react-image-lightbox/style.css";
+import { Button } from "@/components/ui/button";
+import {
+  CalendarIcon,
+  ClockIcon,
+  TagIcon,
+  XIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon,
+} from "lucide-react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
 import "swiper/css";
@@ -91,6 +97,25 @@ const BlogPostDetail = () => {
 
   const allImages = [blogPost.mainImage, ...blogPost.images];
 
+  const openLightbox = (index) => {
+    setPhotoIndex(index);
+    setLightboxOpen(true);
+  };
+
+  const closeLightbox = () => {
+    setLightboxOpen(false);
+  };
+
+  const nextImage = () => {
+    setPhotoIndex((prevIndex) => (prevIndex + 1) % allImages.length);
+  };
+
+  const prevImage = () => {
+    setPhotoIndex(
+      (prevIndex) => (prevIndex - 1 + allImages.length) % allImages.length
+    );
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-teal-50 p-8">
       <motion.div
@@ -158,10 +183,7 @@ const BlogPostDetail = () => {
               <div className="space-y-6">
                 <div
                   className="relative h-64 w-full cursor-pointer"
-                  onClick={() => {
-                    setPhotoIndex(0);
-                    setLightboxOpen(true);
-                  }}
+                  onClick={() => openLightbox(0)}
                 >
                   <Image
                     src={blogPost.mainImage}
@@ -183,10 +205,7 @@ const BlogPostDetail = () => {
                     <SwiperSlide key={index}>
                       <div
                         className="relative h-48 w-full cursor-pointer"
-                        onClick={() => {
-                          setPhotoIndex(index + 1);
-                          setLightboxOpen(true);
-                        }}
+                        onClick={() => openLightbox(index + 1)}
                       >
                         <Image
                           src={image}
@@ -204,24 +223,47 @@ const BlogPostDetail = () => {
           </CardContent>
         </Card>
       </motion.div>
-      {lightboxOpen && (
-        <Lightbox
-          mainSrc={allImages[photoIndex]}
-          nextSrc={allImages[(photoIndex + 1) % allImages.length]}
-          prevSrc={
-            allImages[(photoIndex + allImages.length - 1) % allImages.length]
-          }
-          onCloseRequest={() => setLightboxOpen(false)}
-          onMovePrevRequest={() =>
-            setPhotoIndex(
-              (photoIndex + allImages.length - 1) % allImages.length
-            )
-          }
-          onMoveNextRequest={() =>
-            setPhotoIndex((photoIndex + 1) % allImages.length)
-          }
-        />
-      )}
+      <AnimatePresence>
+        {lightboxOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-50"
+          >
+            <div className="relative w-full h-full flex items-center justify-center">
+              <motion.img
+                key={photoIndex}
+                src={allImages[photoIndex]}
+                alt={`Lightbox image ${photoIndex + 1}`}
+                className="max-w-full max-h-full object-contain"
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.8 }}
+                transition={{ duration: 0.3 }}
+              />
+              <Button
+                className="absolute top-4 right-4 bg-transparent hover:bg-white/10"
+                onClick={closeLightbox}
+              >
+                <XIcon className="w-6 h-6 text-white" />
+              </Button>
+              <Button
+                className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-transparent hover:bg-white/10"
+                onClick={prevImage}
+              >
+                <ChevronLeftIcon className="w-8 h-8 text-white" />
+              </Button>
+              <Button
+                className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-transparent hover:bg-white/10"
+                onClick={nextImage}
+              >
+                <ChevronRightIcon className="w-8 h-8 text-white" />
+              </Button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

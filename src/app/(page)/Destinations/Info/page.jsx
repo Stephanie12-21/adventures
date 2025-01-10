@@ -1,231 +1,224 @@
 "use client";
 
 import React from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { motion } from "framer-motion";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import { Badge } from "@/components/ui/badge";
+import {
+  CalendarDays,
+  MapPin,
+  Hotel,
+  PlaneTakeoff,
+  PlaneLanding,
+} from "lucide-react";
 
-const places = [
-  {
-    id: 1,
-    name: "Mt. Malinao",
-    location: "Malinao, Philippines",
-    price: "€ 340",
-    image: "/image (1).jpg",
-    reviews: 4.5,
-  },
-  {
-    id: 2,
-    name: "Statue of Liberty",
-    location: "New York, USA",
-    price: "€ 400",
-    image: "/image (2).jpg",
-    reviews: 5,
-  },
-  {
-    id: 3,
-    name: "Thousand Island",
-    location: "North Vietnam",
-    price: "€ 320",
-    image: "/image (3).jpg",
-    reviews: 4,
-  },
-  {
-    id: 4,
-    name: "Basilica Sacre",
-    location: "Paris, France",
-    price: "€ 360",
-    image: "/image (4).jpg",
-    reviews: 3.5,
-  },
-  {
-    id: 5,
-    name: "Mount Fuji",
-    location: "Shizuoka, Japan",
-    price: "€ 380",
-    image: "/image (5).jpg",
-    reviews: 4.8,
-  },
-  {
-    id: 6,
-    name: "Great Wall of China",
-    location: "Beijing, China",
-    price: "€ 450",
-    image: "/image (6).jpg",
-    reviews: 4.9,
-  },
-  {
-    id: 7,
-    name: "Santorini",
-    location: "Santorini, Greece",
-    price: "€ 420",
-    image: "/image (7).jpg",
-    reviews: 4.7,
-  },
-  {
-    id: 8,
-    name: "Grand Canyon",
-    location: "Arizona, USA",
-    price: "€ 350",
-    image: "/image (8).jpg",
-    reviews: 4.6,
-  },
-  {
-    id: 9,
-    name: "Pyramids of Giza",
-    location: "Cairo, Egypt",
-    price: "€ 330",
-    image: "/image (9).jpg",
-    reviews: 4.3,
-  },
-  {
-    id: 10,
-    name: "Machu Picchu",
-    location: "Cusco Region, Peru",
-    price: "€ 370",
-    image: "/image (10).jpg",
-    reviews: 5,
-  },
-  {
-    id: 11,
-    name: "Eiffel Tower",
-    location: "Paris, France",
-    price: "€ 300",
-    image: "/image (11).jpg",
-    reviews: 4.9,
-  },
-  {
-    id: 12,
-    name: "Niagara Falls",
-    location: "Ontario, Canada",
-    price: "€ 310",
-    image: "/image (12).jpg",
-    reviews: 4.6,
-  },
-  {
-    id: 13,
-    name: "Colosseum",
-    location: "Rome, Italy",
-    price: "€ 380",
-    image: "/image (13).jpg",
-    reviews: 4.7,
-  },
-  {
-    id: 14,
-    name: "Sydney Opera House",
-    location: "Sydney, Australia",
-    price: "€ 400",
-    image: "/image (14).jpg",
-    reviews: 4.8,
-  },
-  {
-    id: 15,
-    name: "Taj Mahal",
-    location: "Agra, India",
-    price: "€ 340",
-    image: "/image (15).jpg",
-    reviews: 4.5,
-  },
-  {
-    id: 16,
-    name: "Christ the Redeemer",
-    location: "Rio de Janeiro, Brazil",
-    price: "€ 350",
-    image: "/image (16).jpg",
-    reviews: 4.6,
-  },
-  {
-    id: 17,
-    name: "Angkor Wat",
-    location: "Siem Reap, Cambodia",
-    price: "€ 320",
-    image: "/image (17).jpg",
-    reviews: 4.7,
-  },
-  {
-    id: 18,
-    name: "Banff National Park",
-    location: "Alberta, Canada",
-    price: "€ 370",
-    image: "/image (18).jpg",
-    reviews: 4.8,
-  },
-  {
-    id: 19,
-    name: "Table Mountain",
-    location: "Cape Town, South Africa",
-    price: "€ 360",
-    image: "/image (19).jpg",
-    reviews: 4.6,
-  },
-  {
-    id: 20,
-    name: "Petra",
-    location: "Ma'an, Jordan",
-    price: "€ 400",
-    image: "/image (20).jpg",
-    reviews: 4.9,
-  },
-  {
-    id: 21,
-    name: "Burj Khalifa",
-    location: "Dubai, UAE",
-    price: "€ 410",
-    image: "/image (21).jpg",
-    reviews: 4.8,
-  },
-  {
-    id: 22,
-    name: "Mount Kilimanjaro",
-    location: "Tanzania",
-    price: "€ 450",
-    image: "/image (22).jpg",
-    reviews: 4.7,
-  },
-  {
-    id: 23,
-    name: "Iguazu Falls",
-    location: "Argentina/Brazil Border",
-    price: "€ 340",
-    image: "/image (23).jpg",
-    reviews: 4.9,
-  },
-  {
-    id: 24,
-    name: "Stonehenge",
-    location: "Wiltshire, England",
-    price: "€ 300",
-    image: "/image (24).jpg",
-    reviews: 4.5,
-  },
-];
-
-const InfoDestinations = () => {
-  const place = places.find((place) => place.id === parseInt(id, 10));
-
-  if (!place) {
-    return <div>Chargement des informations...</div>;
-  }
+const HawaiiTravelProgram = () => {
+  const program = [
+    {
+      day: 1,
+      activities: [
+        "Arrivée à l'aéroport international d'Honolulu",
+        "Transfert à l'hôtel et check-in",
+        "Temps libre pour se détendre et s'acclimater",
+        "Dîner de bienvenue au restaurant de l'hôtel avec vue sur l'océan",
+      ],
+    },
+    {
+      day: 2,
+      activities: [
+        "Petit-déjeuner à l'hôtel",
+        "Visite guidée de Pearl Harbor et du USS Arizona Memorial",
+        "Déjeuner dans un restaurant local",
+        "Après-midi libre à Waikiki Beach",
+        "Dîner et spectacle de luau traditionnel hawaïen",
+      ],
+    },
+    {
+      day: 3,
+      activities: [
+        "Petit-déjeuner à l'hôtel",
+        "Excursion d'une journée au Parc National des Volcans d'Hawaï",
+        "Randonnée guidée autour du cratère Kilauea",
+        "Pique-nique dans le parc",
+        "Retour à l'hôtel et dîner libre",
+      ],
+    },
+    {
+      day: 4,
+      activities: [
+        "Petit-déjeuner à l'hôtel",
+        "Matinée de snorkeling à Hanauma Bay",
+        "Déjeuner sur la plage",
+        "Après-midi de détente ou shopping à Ala Moana Center",
+        "Dîner croisière au coucher du soleil",
+      ],
+    },
+    {
+      day: 5,
+      activities: [
+        "Petit-déjeuner à l'hôtel",
+        "Excursion en hélicoptère au-dessus de l'île",
+        "Déjeuner dans une plantation d'ananas",
+        "Visite du Polynesian Cultural Center",
+        "Dîner et spectacle polynésien",
+      ],
+    },
+    {
+      day: 6,
+      activities: [
+        "Petit-déjeuner à l'hôtel",
+        "Journée libre pour explorer ou se détendre",
+        "Options : cours de surf, spa, golf, ou excursion à North Shore",
+        "Dîner d'adieu dans un restaurant gastronomique local",
+      ],
+    },
+    {
+      day: 7,
+      activities: [
+        "Petit-déjeuner à l'hôtel",
+        "Temps libre pour les derniers achats ou activités",
+        "Check-out de l'hôtel",
+        "Transfert à l'aéroport pour le vol retour",
+      ],
+    },
+  ];
 
   return (
-    <div className="p-6">
-      <h1 className="text-4xl font-bold text-blue-600">{place.name}</h1>
-      <img
-        src={place.image}
-        alt={place.name}
-        className="w-full h-64 object-cover rounded-md mt-4"
-      />
-      <p className="text-gray-600 mt-4">{place.description}</p>
-      <p className="text-lg font-semibold text-teal-600 mt-4">
-        Localisation : {place.location}
-      </p>
-      <p className="text-lg font-semibold text-teal-600">
-        Prix : {place.price}
-      </p>
-      <div className="flex items-center mt-4">
-        <p className="text-sm text-gray-600 mr-2">Avis :</p>
-        <span className="text-yellow-500 font-bold">{place.reviews} ★</span>
-      </div>
-    </div>
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      className="min-h-screen bg-gradient-to-br from-blue-50 to-teal-50 p-8"
+    >
+      <Card className="max-w-4xl mx-auto">
+        <CardHeader className="bg-gradient-to-r from-blue-500 to-teal-400 text-white">
+          <CardTitle className="text-3xl font-bold">
+            Voyage Organisé à Hawaii
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="p-6">
+          <div className="space-y-6">
+            <section>
+              <h2 className="text-2xl font-semibold text-blue-600 mb-2">
+                Informations Générales
+              </h2>
+              <ul className="list-none space-y-2">
+                <li className="flex items-center">
+                  <Hotel className="w-5 h-5 mr-2 text-teal-500" />
+                  <span>
+                    Hôtel : Hilton Hawaiian Village Waikiki Beach Resort
+                  </span>
+                </li>
+                <li className="flex items-center">
+                  <CalendarDays className="w-5 h-5 mr-2 text-teal-500" />
+                  <span>Durée : 7 jours / 6 nuits</span>
+                </li>
+                <li className="flex items-center">
+                  <MapPin className="w-5 h-5 mr-2 text-teal-500" />
+                  <span>Destination : Honolulu, Hawaii</span>
+                </li>
+              </ul>
+            </section>
+
+            <section>
+              <h2 className="text-2xl font-semibold text-blue-600 mb-2">
+                Programme Détaillé
+              </h2>
+              <Accordion type="single" collapsible className="w-full">
+                {program.map((day) => (
+                  <AccordionItem value={`day-${day.day}`} key={day.day}>
+                    <AccordionTrigger className="text-lg font-medium">
+                      Jour {day.day}
+                    </AccordionTrigger>
+                    <AccordionContent>
+                      <ul className="list-disc pl-5 space-y-1">
+                        {day.activities.map((activity, actIndex) => (
+                          <li key={actIndex}>{activity}</li>
+                        ))}
+                      </ul>
+                    </AccordionContent>
+                  </AccordionItem>
+                ))}
+              </Accordion>
+            </section>
+
+            <section>
+              <h2 className="text-2xl font-semibold text-blue-600 mb-2">
+                Lieux à Visiter
+              </h2>
+              <ul className="list-disc pl-5 space-y-1">
+                <li>Pearl Harbor et USS Arizona Memorial</li>
+                <li>Waikiki Beach</li>
+                <li>Parc National des Volcans d'Hawaï</li>
+                <li>Hanauma Bay</li>
+                <li>Polynesian Cultural Center</li>
+                <li>North Shore (optionnel)</li>
+              </ul>
+            </section>
+
+            <section>
+              <h2 className="text-2xl font-semibold text-blue-600 mb-2">
+                Inclus dans le Prix
+              </h2>
+              <ul className="list-disc pl-5 space-y-1">
+                <li>Vol aller-retour en classe économique</li>
+                <li>Hébergement à l'hôtel Hilton Hawaiian Village</li>
+                <li>Petits-déjeuners quotidiens</li>
+                <li>Transferts aéroport-hôtel-aéroport</li>
+                <li>Toutes les excursions mentionnées dans le programme</li>
+                <li>Guide touristique francophone</li>
+                <li>Taxes et frais de service</li>
+              </ul>
+            </section>
+
+            <section>
+              <h2 className="text-2xl font-semibold text-blue-600 mb-2">
+                Non Inclus
+              </h2>
+              <ul className="list-disc pl-5 space-y-1">
+                <li>Assurance voyage</li>
+                <li>Dépenses personnelles</li>
+                <li>Pourboires pour le guide et le chauffeur</li>
+                <li>Repas non mentionnés dans le programme</li>
+                <li>Activités optionnelles lors de la journée libre</li>
+              </ul>
+            </section>
+
+            <section className="flex justify-between items-center">
+              <div>
+                <h2 className="text-2xl font-semibold text-blue-600 mb-2">
+                  Prix par personne
+                </h2>
+                <p className="text-3xl font-bold text-teal-600">€ 340</p>
+              </div>
+              <div className="space-x-2">
+                <Badge
+                  variant="outline"
+                  className="text-blue-600 border-blue-600"
+                >
+                  <PlaneTakeoff className="w-4 h-4 mr-1" />
+                  Départ : 15 Juin 2025
+                </Badge>
+                <Badge
+                  variant="outline"
+                  className="text-teal-600 border-teal-600"
+                >
+                  <PlaneLanding className="w-4 h-4 mr-1" />
+                  Retour : 21 Juin 2025
+                </Badge>
+              </div>
+            </section>
+          </div>
+        </CardContent>
+      </Card>
+    </motion.div>
   );
 };
 
-export default InfoDestinations;
+export default HawaiiTravelProgram;

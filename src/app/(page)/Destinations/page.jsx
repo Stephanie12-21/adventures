@@ -1,21 +1,21 @@
 "use client";
 
-import { Card, CardContent, CardFooter } from "@/components/ui/card";
-import { useState, useEffect } from "react";
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import { MapPinIcon } from "lucide-react";
+import React, { useEffect, useState } from "react";
+import { ChevronRight } from "lucide-react";
+import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
 } from "@/components/ui/carousel";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
-
+import { StarIcon, MapPinIcon, CalendarIcon } from "lucide-react";
 const places = [
   {
     id: 1,
@@ -298,8 +298,8 @@ export default function ExploreMore() {
     router.push("/Reservations");
   };
 
-  const handleCardClick = (place) => {
-    router.push(`/Destinations/Info/${place.id}`);
+  const handleCardClick = () => {
+    router.push(`/Destinations/Info/`);
   };
 
   return (
@@ -329,7 +329,8 @@ export default function ExploreMore() {
                     className="w-full h-48 object-cover"
                   />
                   <Badge className="absolute top-4 right-4 bg-white/90 text-teal-600 px-3 py-1">
-                    <StarRating rating={place.reviews} />
+                    <StarIcon className="w-4 h-4 inline-block mr-1 text-yellow-500 " />
+                    {place.reviews.toFixed(1)}
                   </Badge>
                   <CardContent className="p-4">
                     <h3 className="font-bold text-lg mb-2">{place.name}</h3>
@@ -388,7 +389,7 @@ export default function ExploreMore() {
               transition={{ duration: 0.5, delay: index * 0.1 }}
             >
               <Card
-                onClick={() => handleCardClick(place)}
+                onClick={() => handleCardClick()}
                 key={index}
                 className="overflow-hidden transition-all duration-300 ease-in-out hover:shadow-xl hover:scale-105 transform"
               >
@@ -398,7 +399,8 @@ export default function ExploreMore() {
                   className="w-full h-48 object-cover"
                 />
                 <Badge className="absolute top-4 right-4 bg-white/90 text-teal-600 px-3 py-1">
-                  <StarRating rating={place.reviews} />
+                  <StarIcon className="w-4 h-4 inline-block mr-1 text-yellow-500 " />
+                  {place.reviews.toFixed(1)}
                 </Badge>
                 <CardContent className="p-4">
                   <h3 className="font-bold text-lg mb-2">{place.name}</h3>
