@@ -52,25 +52,25 @@ export default function Footer() {
 
   const dataIcons = [
     {
-      url: "https://web.facebook.com/",
+      url: "https://web.facebook.com/stephanie.maminiaina.12/",
       img: "/facebook.svg",
       name: "Facebook",
     },
     {
-      url: "https://www.linkedin.com/",
+      url: "https://www.linkedin.com/in/st%C3%A9phanie-maminiaina-262066303/",
       img: "/linkedin.svg",
       name: "LinkedIn",
     },
     {
-      url: "+261 00 00 000 000",
+      url: "+261 38 11 826 27",
       img: "/whatsapp (1).svg",
       name: "WhatsApp",
     },
-    {
-      name: "téléphone",
-      url: "+261 00 00 000 00",
-      img: "/phone.svg",
-    },
+    // {
+    //   name: "téléphone",
+    //   url: "+261 38 11 826 27 ",
+    //   img: "/phone.svg",
+    // },
     {
       name: "email",
       url: "stephaniepageot42@gmail.com",
@@ -157,7 +157,10 @@ export default function Footer() {
       </div>
       <div className=" text-center text-gray-600 mb-10 mt-20">
         &copy; Copyright {currentYear} Adventures | Conçu par{" "}
-        <Link href="/" className="text-teal-500">
+        <Link
+          href="https://stephanie-maminiaina.vercel.app/"
+          className="text-teal-500"
+        >
           Stéphanie MAMINIAINA
         </Link>{" "}
       </div>

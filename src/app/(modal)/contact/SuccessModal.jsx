@@ -1,7 +1,5 @@
-import { motion, AnimatePresence } from 'framer-motion'
-import { Button } from "@/components/ui/button"
-
-
+import { motion, AnimatePresence } from "framer-motion";
+import { Button } from "@/components/ui/button";
 
 export function SuccessModal({ isOpen, onClose }) {
   return (
@@ -26,12 +24,27 @@ export function SuccessModal({ isOpen, onClose }) {
                 transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
                 className="w-20 h-20 bg-gradient-to-r from-blue-500 to-teal-400 rounded-full mx-auto flex items-center justify-center"
               >
-                <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                <svg
+                  className="w-10 h-10 text-white"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M5 13l4 4L19 7"
+                  ></path>
                 </svg>
               </motion.div>
-              <h2 className="mt-6 text-2xl font-bold text-gray-900">Message envoyé avec succès !</h2>
-              <p className="mt-2 text-gray-600">Nous vous répondrons dans les plus brefs délais.</p>
+              <h2 className="mt-6 text-2xl font-bold text-gray-900">
+                Message envoyé avec succès !
+              </h2>
+              <p className="mt-2 text-gray-600">
+                Nous vous répondrons dans les plus brefs délais.
+              </p>
               <Button
                 onClick={onClose}
                 className="mt-6 w-full py-2 px-4 bg-gradient-to-r from-blue-500 to-teal-400 hover:from-blue-600 hover:to-teal-500 text-white font-semibold rounded-lg shadow-md hover:shadow-lg transition-all duration-300 ease-in-out"
@@ -43,6 +56,5 @@ export function SuccessModal({ isOpen, onClose }) {
         </motion.div>
       )}
     </AnimatePresence>
-  )
+  );
 }
-
