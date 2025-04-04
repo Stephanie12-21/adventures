@@ -1,8 +1,9 @@
 import "./globals.css";
 
 export const metadata = {
-  title: "Adventures",
-  description: "Adventures - Votre passerelle vers des voyages inoubliables",
+  title: "Zaha",
+  description:
+    "Zaha - Votre passerelle vers des voyages inoubliables à travers les merveilles de Madagascar",
 };
 
 export default function RootLayout({ children }) {

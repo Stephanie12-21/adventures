@@ -294,10 +294,6 @@ export default function ExploreMore() {
     });
   }, [api]);
 
-  const handleReservation = () => {
-    router.push("/Reservations");
-  };
-
   const handleCardClick = () => {
     router.push(`/Destinations/Info/`);
   };
@@ -346,10 +342,7 @@ export default function ExploreMore() {
                       </span>
                     </div>
 
-                    <Button
-                      onClick={handleReservation}
-                      className="text-white bg-teal-500 hover:bg-teal-500 hover:text-white"
-                    >
+                    <Button className="text-white bg-teal-500 hover:bg-teal-500 hover:text-white">
                       Réserver maintenant
                     </Button>
                   </CardFooter>
@@ -415,10 +408,7 @@ export default function ExploreMore() {
                       {place.price}
                     </span>
                   </div>
-                  <Button
-                    onClick={handleReservation}
-                    className="text-white bg-teal-500 hover:bg-teal-500 hover:text-white"
-                  >
+                  <Button className="text-white bg-teal-500 hover:bg-teal-500 hover:text-white">
                     Réserver maintenant
                   </Button>
                 </CardFooter>

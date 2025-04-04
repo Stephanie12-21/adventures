@@ -12,7 +12,7 @@ import {
 import { useState } from "react";
 import { Calendar } from "../ui/calendar";
 
-export default function Hero({ className }) {
+export default function Hero({}) {
   const [date, setDate] = useState(null);
 
   return (
