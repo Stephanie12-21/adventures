@@ -35,7 +35,9 @@ export default function Header() {
                 height={40}
                 className="mr-2"
               />
-              <span className="text-2xl font-bold text-teal-500">Zaha</span>
+              <span className="text-2xl font-bold text-teal-500">
+                Adventures
+              </span>
             </Link>
           </div>
 

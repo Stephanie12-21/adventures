@@ -92,12 +92,12 @@ export default function Footer() {
                 className="mr-2"
               />
               <span className="text-2xl font-bold text-teal-500">
-                Zaha
+                Adventures
               </span>
             </Link>
           </div>
           <p className="text-gray-600 mt-5">
-            Venez découvrir les merveilles du Madagascar avec Zaha.
+            Venez découvrir les merveilles du Madagascar avec Adventures.
             <br />
             Notre objectif? Vous faire vivre des expériences inoubliables vers
             vos destinations de rêves.
@@ -156,7 +156,7 @@ export default function Footer() {
         </div>
       </div>
       <div className=" text-center text-gray-600 mb-10 mt-20">
-        &copy; Copyright {currentYear} Zaha | Conçu par{" "}
+        &copy; Copyright {currentYear} Adventures | Conçu par{" "}
         <Link
           href="https://stephanie-maminiaina.vercel.app/"
           className="text-teal-500"

@@ -2,7 +2,13 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardFooter,
+} from "@/components/ui/card";
 import {
   Accordion,
   AccordionContent,
@@ -10,15 +16,19 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Badge } from "@/components/ui/badge";
+import { useRouter } from "next/navigation";
 import {
   CalendarDays,
   MapPin,
   Hotel,
   PlaneTakeoff,
   PlaneLanding,
+  Ticket,
 } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const HawaiiTravelProgram = () => {
+  const router = useRouter();
   const program = [
     {
       day: 1,
@@ -216,6 +226,18 @@ const HawaiiTravelProgram = () => {
             </section>
           </div>
         </CardContent>
+        <CardFooter className="p-6 bg-white flex justify-center">
+          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+            <Button
+              size="lg"
+              onClick={() => router.push("/Reservations")}
+              className="bg-gradient-to-r from-blue-500 to-teal-400 hover:from-blue-600 hover:to-teal-500 text-white font-bold text-lg px-8 py-6"
+            >
+              <Ticket className="w-5 h-5 mr-2" />
+              Réserver Maintenant
+            </Button>
+          </motion.div>
+        </CardFooter>
       </Card>
     </motion.div>
   );
