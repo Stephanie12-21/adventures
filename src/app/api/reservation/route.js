@@ -2,7 +2,7 @@ import nodemailer from "nodemailer";
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 
-async function sendMessageContact(
+async function sendReservation(
   nom,
   email,
   phone1,
@@ -97,7 +97,7 @@ async function sendMessageContact(
             margin-bottom: 10px;
           "
         >
-          Message :
+          Détails de la réservation :
         </h2>
         <p
           style="
@@ -200,6 +200,182 @@ async function sendMessageContact(
   }
 }
 
+async function sendConfirmReservationToClient(
+  nom,
+  email,
+  phone1,
+  phone2,
+  adults,
+  childrens,
+  babies,
+  passengers,
+  message
+) {
+  const transporter = nodemailer.createTransport({
+    host: process.env.SMTP_HOST,
+    port: parseInt(process.env.SMTP_PORT, 10),
+    secure: process.env.SMTP_PORT === "465",
+    auth: {
+      user: process.env.SMTP_USER,
+      pass: process.env.SMTP_PASS,
+    },
+  });
+
+  const mailOptions = {
+    from: process.env.SMTP_USER,
+    to: email,
+    subject:
+      "Confirmation de réception de la réservation depuis le site Adventures",
+    html: `
+ <div
+    style="
+      font-family: Segoe UI, Tahoma, Geneva, Verdana, sans-serif;
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #f0f4f8;
+      border-radius: 10px;
+
+    "
+  >
+    <div
+      style="
+        background: linear-gradient(to right, #3b82f6, #14b8a6);
+        padding: 30px;
+        border-radius: 8px 8px 0 0;
+        text-align: center;
+        margin-bottom: 20px;
+     "
+    >
+      <h1
+        style="
+        color: #ffffff;
+        margin: 0;
+        font-size: 28px;
+        font-weight: bold;
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+      "
+      >
+        Confirmation de réception de votre réservation 
+      </h1>
+    </div>
+
+    <div
+      style="padding: 30px;
+        background-color: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        line-height: 1.6;
+        color: #333333;
+    "
+    >
+      <p style="font-size: 24px; margin-bottom: 20px;">Bonjour Adventures,</p>
+
+      <p style=" font-size: 16px; margin-bottom: 20px;">
+        Bonjour,
+        <strong style="color: #3b82f6;">
+           ${nom}
+        </strong>
+        , nous avons bien reçu votre réservation et nous vous remercions de votre confiance.
+      </p>
+
+     
+
+      <hr style=" border: 1px solid #e2e8f0; margin: 30px 0;" />
+
+      <h2
+        style="
+          font-size: 20px;
+          font-weight: bold;
+          color: #3b82f6;
+          margin-bottom: 15px;
+        "
+      >
+        Informations de la réservation :
+      </h2>
+
+      <table
+        style="
+          width: 100%;
+          border-collapse: collapse;
+          margin-bottom: 20px;
+          line-height: 1.5;
+          font-size: 16px
+    "
+      >
+        <tr>
+          <td
+            style="
+              padding: 8px;
+              border-bottom: 1px solid #e2e8f0;
+              font-weight: bold;
+              width: 30%;
+            "
+          >
+            Nom :
+          </td>
+          <td style=" padding: 8px; border-bottom: 1px solid #e2e8f0;">${nom}</td>
+        </tr>
+        <tr>
+          <td
+            style="
+              padding: 8px;
+              border-bottom: 1px solid #e2e8f0;
+              font-weight: bold;
+            "
+          >
+            Email :
+          </td>
+          <td style=" padding: 8px; border-bottom: 1px solid #e2e8f0;">
+            ${email}
+          </td>
+        </tr>
+        <tr>
+          <td style="padding: 8px; font-weight: bold;">Téléphone :</td>
+          <td style=" padding: 8px;">${phone1} // ${phone2}</td>
+        </tr>
+
+        <tr>
+          <td style="padding: 8px; font-weight: bold;">Nombre de passagers :</td>
+          <td style=" padding: 8px;">${passengers} passagers avec ${adults} adultes , ${childrens} enfants et ${babies} bébés</td>
+        </tr>
+
+         <tr>
+          <td style="padding: 8px; font-weight: bold;">Détails importants :</td>
+          <td style=" padding: 8px;">${message}</td>
+        </tr>
+      </table>
+
+      <p style="font-size: 16px; margin-bottom: 5px;">Nous reviendrons vers vous pour confirmer votre réservation, à très vite</p>
+      <p style="font-size: 16px; font-weight: bold; color: #3b82f6; ">
+        L'équipe de Adventures
+      </p>
+    </div>
+
+    <div
+      style="
+        text-align: center;
+        padding-top: 20px;
+        color: #666;
+        font-size: 12px;
+      "
+    >
+      <p>© 2025 Adventures, conçu par Stéphanie MAMINIAINA.</p>
+    </div>
+  </div>
+
+  `,
+  };
+
+  try {
+    await transporter.sendMail(mailOptions);
+    console.log("Message envoyé avec succès !");
+  } catch (error) {
+    console.error("Erreur lors de l'envoi de l'e-mail :", error);
+    throw new Error("Erreur lors de l'envoi de l'e-mail");
+  }
+}
+
 export async function POST(req) {
   const { nom, phone1, email, phone2, childrens, adults, babies, message } =
     await req.json();
@@ -241,7 +417,7 @@ export async function POST(req) {
       },
     });
 
-    await sendMessageContact(
+    await sendReservation(
       nom,
       email,
       phone1,
@@ -253,6 +429,17 @@ export async function POST(req) {
       message
     );
 
+    await sendConfirmReservationToClient(
+      nom,
+      email,
+      phone1,
+      phone2,
+      parsedAdults,
+      parsedChildrens,
+      parsedBabies,
+      totalPassengers,
+      message
+    );
     return new NextResponse(
       JSON.stringify({
         message: "Réservation enregistrée avec succès.",
