@@ -111,7 +111,9 @@ export default function Footer() {
             <h3 className="text-xl font-semibold text-gray-800">
               Soyez les premiers au courant grâce à notre newsletter.
             </h3>
-            <div className="flex space-x-3 mt-5 w-full">
+
+            {/* Container responsive */}
+            <div className="flex flex-col md:flex-row mt-5 w-full gap-3">
               <input
                 type="email"
                 value={email}
@@ -125,7 +127,7 @@ export default function Footer() {
               <Button
                 onClick={handleSubmit}
                 disabled={loading}
-                className=" px-8 py-6  bg-gradient-to-r  from-blue-500 to-teal-400 hover:from-blue-600 hover:to-teal-500 text-white text-lg font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+                className="w-full md:w-auto px-8 py-6 bg-gradient-to-r from-blue-500 to-teal-400 hover:from-blue-600 hover:to-teal-500 text-white text-lg font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
               >
                 {loading ? "Traitement en cours..." : "S'abonner"}
               </Button>
