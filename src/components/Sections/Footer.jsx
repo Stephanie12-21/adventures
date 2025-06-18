@@ -66,11 +66,7 @@ export default function Footer() {
       img: "/whatsapp (1).svg",
       name: "WhatsApp",
     },
-    // {
-    //   name: "téléphone",
-    //   url: "+261 38 11 826 27 ",
-    //   img: "/phone.svg",
-    // },
+
     {
       name: "email",
       url: "stephaniepageot42@gmail.com",
